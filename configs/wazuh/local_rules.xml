@@ -1,0 +1,33 @@
+<!--
+  Wazuh Custom Rules Configuration
+  Author: Sayf eddine Laamri (ABHT Internship)
+  File: /var/ossec/etc/rules/local_rules.xml
+  Reference: Chapter 3, Section 10.9 & 10.12 (Pages 61, 67)
+-->
+<group name="local,syslog,sshd,suricata,">
+
+  <!-- SSH Brute Force Rule Detection -->
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+  <!-- Suricata Custom XSS Detection to trigger Email Dispatch -->
+  <rule id="1000100" level="10">
+    <if_sid>86600</if_sid>
+    <match>CUSTOM XSS</match>
+    <description>Suricata - Alerte XSS détectée sur le Honeypot DVWA</description>
+    <group>xss,web-attack,suricata,pci_dss_6.5,pci_dss_11.4,</group>
+    <options>alert_by_email</options>
+  </rule>
+
+  <!-- VirusTotal Positive Malware Detection to trigger Automated Threat Removal -->
+  <rule id="100500" level="12">
+    <if_sid>87105</if_sid>
+    <description>VirusTotal: Malware confirmed in monitored directory - Triggering Auto-Remediation</description>
+    <group>virustotal,malware,active_response,</group>
+  </rule>
+
+</group>

@@ -1,0 +1,26 @@
+# ==============================================================================
+# Suricata Custom Detection & Prevention Signatures
+# Author: Sayf eddine Laamri (ABHT Internship)
+# File: /etc/suricata/rules/local.rules
+# Reference: Chapter 3, Section 10.4.1 (Pages 41-42)
+# ==============================================================================
+
+# ICMP Testing & Reconnaissance
+alert icmp any any -> any any (msg:"Ping ICMP détecté"; sid:1000001; rev:1;)
+drop icmp any any -> any any (msg:"Ping ICMP bloqué (Mode IPS)"; sid:1000002; rev:1;)
+
+# Port Scanning & Network Reconnaissance
+alert tcp any any -> any any (flags:S; msg:"Scan Nmap détecté (SYN Scan)"; sid:1000003; rev:1;)
+alert tcp any any -> any 21 (msg:"Connexion FTP non chiffrée détectée"; sid:1000004; rev:1;)
+alert tcp any any -> any 22 (msg:"Connexion SSH détectée - Surveillance Brute Force"; sid:1000005; rev:1;)
+
+# Web Application Attacks (DVWA Honeypot decoying)
+alert http any any -> any any (msg:"CUSTOM XSS Detected (Script tag injection)"; content:"<script>"; nocase; http_uri; classtype:web-application-attack; sid:1000100; rev:1;)
+alert http any any -> any any (msg:"CUSTOM XSS Detected in POST body"; content:"<script>"; nocase; http_client_body; classtype:web-application-attack; sid:1000101; rev:1;)
+alert http any any -> any any (msg:"CUSTOM SQL Injection Attempt (Authentication bypass)"; content:"' OR '1'='1"; nocase; http_client_body; classtype:web-application-attack; sid:1000111; rev:1;)
+alert http any any -> any any (msg:"CUSTOM SQL Injection Attempt (Tautology check)"; content:"' OR 1=1"; nocase; http_uri; classtype:web-application-attack; sid:1000112; rev:1;)
+alert http any any -> any any (msg:"CUSTOM LFI Attempt (Directory traversal)"; content:"../../"; http_uri; classtype:web-application-attack; sid:1000021; rev:1;)
+alert http any any -> any any (msg:"CUSTOM LFI Attempt (/etc/passwd access)"; content:"/etc/passwd"; http_uri; classtype:web-application-attack; sid:1000022; rev:1;)
+alert http any any -> any any (msg:"CUSTOM RFI Attempt (Remote HTTP include)"; content:"http://"; http_uri; classtype:web-application-attack; sid:1000023; rev:1;)
+alert http any any -> any any (msg:"CUSTOM SSRF Attempt (Localhost metadata query)"; content:"127.0.0.1"; http_uri; classtype:web-application-attack; sid:1000024; rev:1;)
+alert http any any -> any any (msg:"CUSTOM PHP Web Shell Upload Attempt"; content:".php"; http_client_body; classtype:web-application-attack; sid:1000025; rev:1;)
