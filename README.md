@@ -335,7 +335,20 @@ I wish to express my deepest appreciation to:
 - The administration, faculty, and professors of **ENSA Marrakech** and **Université Cadi Ayyad**, especially the instructors of the **GCDSTE** program, for imparting the solid technical and engineering fundamentals that enabled the successful delivery of this project.
 
 ---
+## 🤝 some demos videos:
 
+https://github.com/user-attachments/assets/57fa7aeb-86aa-4ead-9e39-4c8fd03cd562
+
+https://github.com/user-attachments/assets/1a80f716-5be0-433a-a368-f763cc29bc02
+
+https://github.com/user-attachments/assets/eb0e0b67-8878-465b-abf2-eabdb03c0366
+
+https://github.com/user-attachments/assets/3d954fd1-0e9a-4860-a17d-96dd8dd7ee07
+
+https://github.com/user-attachments/assets/d39155af-8c00-4e60-adc6-46769553bd85
+
+
+---
 <p align="center">
   <b>Sayf eddine Laamri</b> • ENSA Marrakech • Filière GCDSTE • ABHT Internship Project (2025)<br/>
   <i>Dedicated to the cyber-defense and operational resilience of national critical infrastructure.</i>
